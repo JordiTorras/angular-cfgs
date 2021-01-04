@@ -1,7 +1,0 @@
-<cfg>
-    <element>
-        <id>nombre</id>
-        <visible>verdadero</visible>
-        <editable>falso</editable>
-    </element>
-</cfg>

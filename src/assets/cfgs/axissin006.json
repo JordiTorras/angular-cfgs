@@ -1,0 +1,16 @@
+[
+    {
+        "id": "nombre",
+        "visible": true,
+        "editable": false,
+        "mandatorio": true
+    },
+    {
+        "id": "apellido",
+        "valor": "Torras"
+    },
+    {
+        "id": "noexiste",
+        "visble": "false"
+    }
+]

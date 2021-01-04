@@ -13,7 +13,7 @@ export class AppComponent {
 
   //@ViewChild('myButton') myButton: ElementRef;
 
-  constructor(private renderer: Renderer2, private _cfg: CfgService) {}
+  constructor(private _cfg: CfgService, private renderer: Renderer2) {}
 
   /*
   addMyClass() {
@@ -46,14 +46,15 @@ export class AppComponent {
     // Se ejecuta despues de inicialiar la vista
     console.log('Inicio');
     //this.wait(5000);
-    this.renderer.setProperty(
-      document.getElementById('nombre'),
-      'disabled',
-      'treue'
-    );
+
+    // this.renderer.setProperty(
+    //   document.getElementById('nombre'),
+    //   'disabled',
+    //   'true'
+    // );
     console.log('despues de cargar la pagina');
 
-    this._cfg.leerCfg('axissin006');
+    this._cfg.f_leerCfg('axissin006');
   }
 
   wait(ms: any) {
