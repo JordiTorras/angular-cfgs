@@ -14,6 +14,7 @@ interface CfgPropertyResponse {
   editable: string;
   obligatorio: string;
   valor: string;
+  etiqueta: string;
 }
 
 // class CfgProperty {
@@ -62,30 +63,105 @@ export class CfgService {
     const numProperties = properties.length;
 
     for (let property of properties) {
-      let el: HTMLInputElement = <HTMLInputElement>(
-        document.getElementById(property.id)
-      );
+      let el: HTMLElement = <HTMLElement>document.getElementById(property.id);
       if (el === null) continue; // Si el elemento no existe saltamos al siguiente
 
-      console.log(property);
-      console.log(el);
+      //   console.log(property);
+      //   console.log(el);
 
-      // visible / no visible
-      if (property.visible === 'verdadero') this.visualizar(el);
-      if (property.visible === 'falso') this.visualizar(el);
+      // visible
+      if (property.visible !== undefined && property.visible) {
+        this.visible(el);
 
-      if (property.editable) this.editable(el);
-      if (!property.editable) this.bloqueado(el);
+        let label: HTMLElement = <HTMLElement>(
+          document.getElementById('label_' + property.id)
+        );
+        if (label !== null) this.visible(label);
+      }
+
+      // ocultar
+      if (property.visible !== undefined && !property.visible) {
+        this.ocultar(el);
+        let label: HTMLElement = <HTMLElement>(
+          document.getElementById('label_' + property.id)
+        );
+        if (label !== null) this.ocultar(label);
+      }
+
+      // editable
+      if (property.editable !== undefined && property.editable) {
+        this.editable(el);
+      }
+
+      // no editable
+      if (property.editable !== undefined && !property.editable) {
+        this.bloquear(el);
+      }
+
+      // obligatorio
+      if (property.obligatorio !== undefined && property.obligatorio) {
+        this.obligatorio(el);
+      }
+
+      // opcional
+      if (property.obligatorio !== undefined && !property.obligatorio) {
+        this.opcional(el);
+      }
+
+      // valor
+      if (property.valor !== undefined) {
+        this.valor(el, property.valor);
+      }
+
+      // label
+      if (property.etiqueta !== undefined) {
+        let label: HTMLElement = <HTMLElement>(
+          document.getElementById('label_' + property.id)
+        );
+        if (label !== null) this.etiqueta(label, property.etiqueta);
+      }
     }
+
+    console.log('Salida this.f_tratarCfgFile ' + new Date().getTime());
   }
 
-  visualizar(el: HTMLInputElement) {
-    //this.renderer.setProperty(el, 'visible', 'true');
+  visible(el: HTMLElement) {
+    // console.log('visible ' + el);
+    this.renderer.removeAttribute(el, 'hidden');
   }
-  editable(el: HTMLInputElement) {}
 
-  bloqueado(el: HTMLInputElement) {
-    console.log(el);
+  ocultar(el: HTMLElement) {
+    // console.log('ocultar ' + el);
+
+    this.renderer.setProperty(el, 'hidden', 'true');
+  }
+
+  editable(el: HTMLElement) {
+    // console.log('editable ' + el);
+
+    this.renderer.removeAttribute(el, 'disabled');
+    this.renderer.setProperty(el, 'disabled', 'false');
+  }
+
+  bloquear(el: HTMLElement) {
+    // console.log('bloquear ' + el);
+
     this.renderer.setProperty(el, 'disabled', 'true');
+  }
+
+  obligatorio(el: HTMLElement) {
+    this.renderer.addClass(el, 'cfg-obligatorio');
+  }
+
+  opcional(el: HTMLElement) {
+    this.renderer.removeClass(el, 'cfg-obligatorio');
+  }
+
+  valor(el: HTMLElement, value: string) {
+    this.renderer.setProperty(el, 'value', value);
+  }
+
+  etiqueta(el: HTMLElement, value: string) {
+    this.renderer.setProperty(el, 'textContent', value);
   }
 }

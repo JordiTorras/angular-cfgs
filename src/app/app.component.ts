@@ -13,46 +13,14 @@ export class AppComponent {
 
   //@ViewChild('myButton') myButton: ElementRef;
 
-  constructor(private _cfg: CfgService, private renderer: Renderer2) {}
-
-  /*
-  addMyClass() {
-    //this.myButton.nativeElement.classList.add("my-class"); //BAD PRACTICE
-    this.renderer.addClass(this.myButton.nativeElement, 'my-class');
-  }
-
-  removeMyClass() {
-    //this.myButton.nativeElement.classList.remove("my-class"); //BAD PRACTICE
-    this.renderer.removeClass(this.myButton.nativeElement, 'my-class');
-  }
-
-  disable() {
-    //this.myButton.nativeElement.setAttribute("disabled", "true"); //BAD PRACTICE
-    this.renderer.setAttribute(this.myButton.nativeElement, 'disabled', 'true');
-  }
-
-  enable() {
-    //this.myButton.nativeElement.removeAttribute("disabled"); //BAD PRACTICE
-    this.renderer.removeAttribute(this.myButton.nativeElement, 'disabled');
-  }
-
-  clickButton() {
-    //this.myButton.nativeElement.click(); //BAD PRACTICE
-    this.renderer.selectRootElement(this.myButton.nativeElement).click();
-  }
-  */
+  constructor(private _cfg: CfgService /* , private renderer: Renderer2 */) {}
 
   ngAfterViewInit(): void {
     // Se ejecuta despues de inicialiar la vista
     console.log('Inicio');
     //this.wait(5000);
 
-    // this.renderer.setProperty(
-    //   document.getElementById('nombre'),
-    //   'disabled',
-    //   'true'
-    // );
-    console.log('despues de cargar la pagina');
+    console.log('despues de cargar la pagina ' + new Date().getTime());
 
     this._cfg.f_leerCfg('axissin006');
   }
@@ -67,13 +35,5 @@ export class AppComponent {
 
   f_onclick() {
     console.log('done');
-
-    this.renderer.setProperty(
-      document.getElementById('nombre'),
-      'value',
-      'Jordi'
-    );
-
-    console.log();
   }
 }

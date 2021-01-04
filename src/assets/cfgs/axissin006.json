@@ -1,16 +1,26 @@
 [
     {
-        "id": "nombre",
-        "visible": true,
+        "id": "nombre1",
+        "obligatorio": true     
+    },
+    {
+        "id": "nombre2",
+        "visible": true
+    },
+    {
+        "id": "apellido2",
         "editable": false,
-        "mandatorio": true
+        "valor": "no aplica",
+        "etiqueta": "Segon cognom: "
     },
     {
-        "id": "apellido",
-        "valor": "Torras"
+        "id": "apellido1",
+        "obligatorio": true
     },
     {
-        "id": "noexiste",
-        "visble": "false"
+        "id": "sexo",
+        "obligatorio": true,
+        "valor": "M"
     }
+
 ]
